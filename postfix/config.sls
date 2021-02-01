@@ -102,6 +102,9 @@ postfix_{{ domain }}_ssl_key:
 
 {% endfor %}
 
+{# Used for newaliases, postalias and postconf #}
+{%- set default_database_type = salt['pillar.get']('postfix:config:default_database_type', 'hash') %}
+
 # manage various mappings
 {% for mapping, data in salt['pillar.get']('postfix:mapping', {}).items() %}
   {%- set need_postmap = False %}
